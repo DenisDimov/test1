@@ -3,6 +3,10 @@
   "rules": {
     "import/newline-after-import": "off",
     "object-curly-newline": "off",
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
     "no-shadow": "off",
     "no-underscore-dangle": [
       "error",
