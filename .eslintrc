@@ -2,7 +2,10 @@
   "extends": "airbnb-base",
   "rules": {
     "import/newline-after-import": "off",
+    "import/extensions": "off",
     "object-curly-newline": "off",
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
     "linebreak-style": [
       "error",
       "windows"
