@@ -7,16 +7,29 @@ class Goods {
       const good = await goods.create({ name, amount });
       return res.json(good);
     } catch (e) {
-      res.status(500).json(e);
+      res.status(500).json({
+        detail: {
+          error: "Server error",
+        },
+      });
     }
   }
 
   async getAll(req, res) {
     try {
-      const goodsAll = await goods.find({});
-      return res.json(goodsAll);
+      const { page = 1, limit = 10 } = req.query;
+      const goodsAll = await goods
+        .find({})
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
+      const count = await goods.countDocuments();
+      return res.json({ goodsAll, totalPages: Math.ceil(count / limit), currentPage: page });
     } catch (e) {
-      res.status(500).json(e);
+      res.status(500).json({
+        detail: {
+          error: "Server error",
+        },
+      });
     }
   }
 
@@ -33,7 +46,11 @@ class Goods {
       const good = await goods.findById(id);
       return res.json(good);
     } catch (e) {
-      res.status(500).json(e);
+      res.status(500).json({
+        detail: {
+          error: "Server error",
+        },
+      });
     }
   }
 
@@ -43,7 +60,11 @@ class Goods {
       const good = await goods.findByIdAndRemove(id);
       return res.json(good);
     } catch (e) {
-      res.status(500).json(e);
+      res.status(500).json({
+        detail: {
+          error: "Server error",
+        },
+      });
     }
   }
 }
